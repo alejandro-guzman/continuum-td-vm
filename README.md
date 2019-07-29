@@ -30,6 +30,12 @@ To rerun the provisioning section of the Vagrantfile.
 vagrant provision
 ```
 
+To provision and target a provision section use the `--provision-with` option.
+
+```bash
+vagrant provision --provision-with testdrive
+```
+
 The `docker-continuum` directory should be mounted in to the guest machine at
 `/docker-continuum`.
 
