@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "~/docker-continuum", "/docker-continuum"
   config.vm.provider "virtualbox" do |vb|
     vb.name = "Continuum VM"
-    vb.memory = "2048"
+    vb.memory = "4096"
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
     chmod +x /usr/local/bin/docker-compose
     
     usermod -aG docker vagrant
-    /usr/local/bin/docker-compose -f /docker-continuum/docker-compose.yml up --build
+    /usr/local/bin/docker-compose -f /docker-continuum/vs-test-drive/compose-testdrive.yml up --build
     echo "Done"
   SHELL
 end
