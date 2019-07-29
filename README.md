@@ -58,3 +58,12 @@ Or, to open a port on the host
 config.vm.network "forwarded_port", guest: $GUEST_PORT, host: $HOST_PORT
 ...
 ```
+
+To completely destroy the VM in VirtualBox
+
+```bash
+vagrant destroy
+```
+
+The `Vagrantfile` is the VM definition so you can repeatedly create and destroy
+the VM with confidence.
