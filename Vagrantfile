@@ -60,7 +60,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "testdrive", type: "shell", inline: <<-SHELL
     echo "Running testdrive..."
-    /usr/local/bin/docker-compose -f /docker-continuum/vs-test-drive/compose-testdrive.yml up --build
+    /usr/bin/docker network create proxy
+    /usr/bin/docker network create backend
+    /usr/local/bin/docker-compose -f /docker-continuum/vs-demo/docker-compose.yml up --build
     echo "Finished testdrive"
   SHELL
 end
