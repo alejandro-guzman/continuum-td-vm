@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
-  config.vm.hostname = "continuum-td-vm"
+  config.vm.hostname = "continuum-demo-vm"
 
   # Continuum, Windows Dell app listening on 8080, TODO turn off
   config.vm.network "forwarded_port", guest: 8080, host: 7080
@@ -19,8 +19,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "~/docker-continuum", "/docker-continuum"
   
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "Continuum Testdrive VM"
-    vb.memory = "4096"
+    vb.memory = "5120"
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
@@ -46,7 +45,7 @@ Vagrant.configure("2") do |config|
       $(lsb_release -cs) \
       stable"
     apt-get update
-    apt-get install -y docker-ce docker-ce-cli containerd.io
+    apt-get install -y docker-ce docker-ce-cli containerd.io python-pip
     apt-cache madison docker-ce
     # -------------------
     # Docker Compose
@@ -58,7 +57,7 @@ Vagrant.configure("2") do |config|
     echo "Finished bootstrap"
   SHELL
 
-  config.vm.provision "testdrive", type: "shell", inline: <<-SHELL
+  config.vm.provision "demo", type: "shell", inline: <<-SHELL
     echo "Running testdrive..."
     /usr/bin/docker network create proxy
     /usr/bin/docker network create backend
